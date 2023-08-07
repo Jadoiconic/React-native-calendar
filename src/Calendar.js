@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, Alert } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import * as Calendar from 'expo-calendar';
 
@@ -57,17 +57,20 @@ async function createCalendar() {
 const addNewEvent = async () => {
     try {
       const calendarId = await createCalendar();
-      
+  
+      const eventStartDate = new Date(startDate); 
+  
       const res = await Calendar.createEventAsync(calendarId, {
-        endDate: getAppointementDate(startDate),
-        startDate: getAppointementDate(startDate),
+        endDate: eventStartDate,
+        startDate: eventStartDate,
         title: 'Happy Birthday buddy ' + friendNameText,
       });
       Alert.alert('Event Created!');
     } catch (e) {
       console.log(e);
     }
-  }; 
+  };
+  
 
 
   return (
